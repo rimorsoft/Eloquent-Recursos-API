@@ -27,7 +27,7 @@ class PostController extends Controller
      */
     public function index()
     {
-        return new PostCollection($this->post->paginate());
+        return new PostCollection($this->post->get());
     }
 
     /**

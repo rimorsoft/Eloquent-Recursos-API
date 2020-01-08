@@ -17,16 +17,6 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
-
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
-
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
-
-Auth::routes();
+Route::middleware('auth')->resource('api/posts', 'Api\PostController', ['except' => 'create', 'edit']);
 
 Route::get('/home', 'HomeController@index')->name('home');

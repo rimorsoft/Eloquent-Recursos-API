@@ -13,4 +13,4 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->resource('posts', 'Api\PostController', ['except' => 'create', 'edit']);
+
