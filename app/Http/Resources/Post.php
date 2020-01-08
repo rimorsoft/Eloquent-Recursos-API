@@ -19,6 +19,7 @@ class Post extends JsonResource
             'title'   => $this->title,
             'body'    => $this->body,
             'created' => $this->created_at->diffForHumans(),
+            'updated' => $this->updated_at->format('d-m-Y'),
         ];
     }
 }

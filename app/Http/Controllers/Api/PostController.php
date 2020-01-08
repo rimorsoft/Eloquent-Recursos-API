@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Post;
 
+use Illuminate\Http\Request;
 use App\Http\Requests\Post as PostRequests;
 
 use App\Http\Resources\Post as PostResources;
