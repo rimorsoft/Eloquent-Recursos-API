@@ -11,12 +11,28 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'PageController@index');
 
 Auth::routes();
 
-Route::middleware('auth')->resource('api/posts', 'Api\PostController', ['except' => 'create', 'edit']);
+Route::resource('api/posts', 'Api\PostController')
+    ->names([
+        'index' => 'api.posts.index',
+        'show'  => 'api.posts.show',
+    ])
+    ->only(['index', 'show']);
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::middleware('auth')
+    ->resource('api/posts', 'Api\PostController')
+    ->names([
+        'store'   => 'api.posts.store',
+        'update'  => 'api.posts.update',
+        'destroy' => 'api.posts.destroy',
+    ])
+    ->only(['store', 'update', 'destroy']);
+
+Route::middleware('auth')
+    ->resource('posts', 'Backend\PostController')
+    ->only(['index', 'create', 'show', 'edit']);
+
+Route::get('/home', 'Backend\HomeController@index')->name('home');

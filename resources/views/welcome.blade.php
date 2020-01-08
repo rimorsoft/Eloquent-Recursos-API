@@ -64,26 +64,50 @@
         </style>
     </head>
     <body>
-        <div class="flex-center position-ref full-height">
-            @if (Route::has('login'))
-                <div class="top-right links">
-                    @auth
-                        <a href="{{ url('/home') }}">Home</a>
-                    @else
-                        <a href="{{ route('login') }}">Login</a>
+        <div id="app">
+            <div class="flex-center position-ref full-height">
+                @if (Route::has('login'))
+                    <div class="top-right links">
+                        @auth
+                            <a href="{{ url('/home') }}">Home</a>
+                        @else
+                            <a href="{{ route('login') }}">Login</a>
 
-                        @if (Route::has('register'))
-                            <a href="{{ route('register') }}">Register</a>
-                        @endif
-                    @endauth
-                </div>
-            @endif
+                            @if (Route::has('register'))
+                                <a href="{{ route('register') }}">Register</a>
+                            @endif
+                        @endauth
+                    </div>
+                @endif
 
-            <div class="content">
-                <div class="title m-b-md">
-                    API Resources
+                <div class="content">
+                    <div class="title m-b-md">
+                        API Resources
+                    </div>
+
+                    <post-component inline-template>
+                        <table class="table table-hover table-striped">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Posts</th>
+                                    <th>&nbsp;</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr v-for="post in posts">
+                                    <td v-text="post.id"></td>
+                                    <td v-text="post.title"></td>
+                                    <td v-text="post.created"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </post-component>
                 </div>
             </div>
         </div>
+
+        <!-- Scripts -->
+        <script src="{{ asset('js/app.js') }}" defer></script>
     </body>
 </html>
