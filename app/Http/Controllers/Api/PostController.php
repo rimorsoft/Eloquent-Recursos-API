@@ -59,9 +59,11 @@ class PostController extends Controller
      * @param  \App\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Post $post)
+    public function update(PostRequests $request, Post $post)
     {
-        //
+        $post->update($request->all());
+
+        return response()->json(new PostResources($post));
     }
 
     /**
@@ -72,6 +74,8 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
-        //
+        $post->delete();
+
+        return response()->json(null, 204);
     }
 }
