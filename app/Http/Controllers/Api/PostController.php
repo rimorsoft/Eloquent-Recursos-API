@@ -4,12 +4,20 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Post;
-use Illuminate\Http\Request;
+
+use App\Http\Requests\Post as PostRequests;
 
 use App\Http\Resources\Post as PostResources;
 
 class PostController extends Controller
 {
+    protected $post;
+
+    public function __construct(Post $post)
+    {
+        $this->post = $post;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -26,9 +34,11 @@ class PostController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(PostRequests $request)
     {
-        //
+        $post = $this->post->create($request->all());
+
+        return response()->json(new PostResources($post), 201);
     }
 
     /**
@@ -39,7 +49,7 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
-        return new PostResources($post);
+        return response()->json(new PostResources($post));
     }
 
     /**
