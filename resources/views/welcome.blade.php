@@ -20,15 +20,13 @@
                                 <tr>
                                     <th>ID</th>
                                     <th>Posts</th>
-                                    <th>Actualizado</th>
-                                    <th>Creado</th>
+                                    <th>&nbsp;</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr v-for="post in posts">
                                     <td v-text="post.id"></td>
                                     <td v-text="post.title"></td>
-                                    <td v-text="post.updated"></td>
                                     <td v-text="post.created"></td>
                                 </tr>
                             </tbody>

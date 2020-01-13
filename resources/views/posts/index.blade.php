@@ -20,14 +20,15 @@
                                 <tr>
                                     <th>ID</th>
                                     <th>Posts</th>
-                                    <th>&nbsp;</th>
+                                    <th colspan="2">&nbsp;</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr v-for="post in posts">
                                     <td v-text="post.id"></td>
                                     <td v-text="post.title"></td>
-                                    <td v-text="post.created"></td>
+                                    <td v-text="post.created_at"></td>
+                                    <td v-text="post.updated_at"></td>
                                 </tr>
                             </tbody>
                         </table>
