@@ -13,26 +13,32 @@
 
 Route::get('/', 'PageController@index');
 
+Route::group(['prefix' => 'api'], function () {
+
+	//Route::apiResource('posts', 'Api\PostController');
+
+	Route::apiResource('posts', 'Api\PostController')
+		->names([
+			'index'   => 'api.posts.index',
+			'show'    => 'api.posts.show',
+		])
+		->only(['index', 'show']);
+
+	Route::apiResource('posts', 'Api\PostController')
+		->middleware('auth')
+		->names([
+			'store'   => 'api.posts.store',
+			'update'  => 'api.posts.update',
+			'destroy' => 'api.posts.destroy',
+		])
+		->only(['store', 'update', 'destroy']);
+
+});
+
 Auth::routes();
 
-Route::resource('api/posts', 'Api\PostController')
-    ->names([
-        'index' => 'api.posts.index',
-        'show'  => 'api.posts.show',
-    ])
-    ->only(['index', 'show']);
-
 Route::middleware('auth')
-    ->resource('api/posts', 'Api\PostController')
-    ->names([
-        'store'   => 'api.posts.store',
-        'update'  => 'api.posts.update',
-        'destroy' => 'api.posts.destroy',
-    ])
-    ->only(['store', 'update', 'destroy']);
-
-Route::middleware('auth')
-    ->resource('posts', 'Backend\PostController')
-    ->only(['index', 'create', 'show', 'edit']);
+	->resource('posts', 'Backend\PostController')
+	->only(['index', 'create', 'edit']);
 
 Route::get('/home', 'Backend\HomeController@index')->name('home');

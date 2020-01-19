@@ -1,21 +1,23 @@
 <script>
-    import axios from 'axios'
+	
+	import axios from 'axios'
 
     export default {
         data () {
-            return {
-                posts: null
-            };
+        	return {
+        		posts: null
+        	}
         },
         mounted () {
-            this.getPosts();
+        	this.getPosts();
         },
         methods: {
-            getPosts: function() {
-                axios.get('api/posts').then(response => {
-                    this.posts = response.data.data
-                });
-            }
+        	getPosts: function () {
+        		axios.get('api/posts').then(response => {
+        			this.posts = response.data
+        		});
+        	}
         }
     }
+
 </script>

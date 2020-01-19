@@ -4,8 +4,8 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Post;
-
 use Illuminate\Http\Request;
+
 use App\Http\Requests\Post as PostRequests;
 
 use App\Http\Resources\Post as PostResources;
@@ -15,7 +15,15 @@ class PostController extends Controller
 {
     protected $post;
 
-    public function __construct(Post $post)
+    /**
+        1XX : Informativo
+        2XX : Respuesta exitosa
+        3XX : Redirección
+        4XX : Errores del cliente
+        5XX : Errores del servidor
+    **/
+
+    public function __construct(Post $post) 
     {
         $this->post = $post;
     }
@@ -27,8 +35,10 @@ class PostController extends Controller
      */
     public function index()
     {
-        return new PostCollection(
-            $this->post->orderBy('id', 'desc')->get()
+        return response()->json(
+            new PostCollection(
+                $this->post->orderBy('id', 'desc')->get()
+            )
         );
     }
 
@@ -54,6 +64,13 @@ class PostController extends Controller
     public function show(Post $post)
     {
         return response()->json(new PostResources($post));
+        /**
+        return [
+            'id'        => $post->id,
+            'post_name' => strtoupper($post->title),
+            'post_body' => strtoupper(substr($post->body, 0, 240)) . '...'
+        ];
+        **/
     }
 
     /**
